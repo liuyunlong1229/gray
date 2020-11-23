@@ -1,0 +1,70 @@
+spring:   
+  mvc:
+    throw-exception-if-no-handler-found: true #出现错误时, 直接抛出异常
+  resources:
+    add-mappings: false #关闭工程中的资源文件建立映射
+    
+  cloud:
+    gateway: 
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+#      - id: wenxin_ver
+#        uri: https://filesv.pateo.com.cn/file/repo/cc/2020/10/20/1603162098897.txt
+#        predicates:
+#          - Path=/hello.txt
+#        filters:
+#          - StripPrefix=1
+      - id: demo-server-a
+        uri: lb://discovery-springcloud-example-a
+        predicates:
+        - Path=/a/**
+        filters:
+        - StripPrefix=1
+      - id: demo-server-b
+        uri: lb://discovery-springcloud-example-b
+        predicates:
+        - Path=/b/**
+        filters:
+        - StripPrefix=1
+      - id: demo-server-c
+        uri: lb://discovery-springcloud-example-c
+        predicates:
+        - Path=/c/**
+        filters:
+        - StripPrefix=1
+    nacos:
+      discovery:
+        metadata:
+          group: example-service-group
+          version: 1.0
+#      - id: order-server
+#        uri: lb://qy-order-server
+#        predicates:
+#        - Path=/gw-order/**
+#        filters:
+#        - StripPrefix=1
+#      - id: business-server
+#        uri: lb://qy-business-server
+#        predicates:
+#        - Path=/gw-business/**
+#        filters:
+#        - StripPrefix=1
+#      - id: command-server
+#        uri: lb://qy-command-server
+#        predicates:
+#        - Path=/gw-command/**
+#        filters:
+#        - StripPrefix=1
+#      - id: push-server
+#        uri: lb://qy-push-server
+#        predicates:
+#          - Path=/gw-push/**
+#        filters:
+#          - StripPrefix=1
+
+server:
+  port: 8769
+  max-http-header-size: 4048576

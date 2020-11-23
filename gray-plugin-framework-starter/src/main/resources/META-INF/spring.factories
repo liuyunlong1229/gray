@@ -1,0 +1,11 @@
+org.springframework.context.ApplicationContextInitializer=\
+com.rainbow.gray.framework.context.NacosApplicationContextInitializer
+
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.rainbow.gray.framework.context.PluginEnvironmentPostProcessor
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.rainbow.gray.framework.starter.configuration.ConfigAutoConfiguration,\
+com.rainbow.gray.framework.starter.configuration.NacosConfigAutoConfiguration,\
+com.rainbow.gray.framework.starter.configuration.PluginAutoConfiguration,\
+com.rainbow.gray.framework.starter.configuration.NacosAutoConfiguration
