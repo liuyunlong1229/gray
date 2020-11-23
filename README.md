@@ -74,3 +74,24 @@ SpringCloud生态，灰度发布，以及服务下线，流量无损
 #### 参与贡献
 
 1.  非常感谢nepxion discovery开源项目，借鉴了设计思路，以及一些代码设计，简化了实现
+
+
+#### 补充
+
+1.请求过程中根据请求头做分支路由时，需要在请求入口处header中带如下参数`Service-List` 来声明调用链路节点选择。
+
+* 示例如下
+`Service-List`=
+```
+
+{"discovery-springcloud-example-b":{"appChannel":"feature","appVer","JID-2"},"discovery-springcloud-example-c":{"appChannel":"feature","appVer","JID-1"}}
+
+```
+2.服务需要配置appChannel，appVer在metatdata中
+
+* 示例如下
+
+```
+spring.cloud.nacos.discovery.metadata.appChannel=feature
+spring.cloud.nacos.discovery.metadata.appVer=JID-2
+```
